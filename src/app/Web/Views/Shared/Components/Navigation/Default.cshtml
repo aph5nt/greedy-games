@@ -1,0 +1,129 @@
+﻿@using Game.Minefield.Contracts.Helpers
+@using Shared.Model
+@using Web.Views.Shared.Components.Navigation
+@model NavigationViewModel
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                    aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <img src="~/images/coinspot.svg" class="coinspot pull-left" />
+            <a class="navbar-brand logo">
+                Greedy<span class="run">Run</span>
+            </a>
+
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            @if (Model.IsAuthenticated)
+            {
+                var selectedNetwork = Model.SelectedNetwork.ToString().ToLower();
+                <ul class="nav navbar-nav navbar-left">
+                    <li>
+                        <a asp-controller="Game"
+                           asp-action="Index"
+                           asp-route-network="@selectedNetwork"
+                           >Play</a>
+                    </li>
+
+                    <li>
+                        <a asp-controller="Statistics"
+                           asp-action="Index"
+                           asp-route-network="@selectedNetwork">Statistics</a>
+                    </li>
+                </ul>
+            }
+            @if (!Model.IsAuthenticated)
+            {
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a asp-controller="Account" asp-action="Register">Register</a>
+                    </li>
+                </ul>
+            }
+
+            @if (Model.IsAuthenticated)
+            {
+                var selectedNetwork = Model.SelectedNetwork.ToString().ToUpper();
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="balance">
+                        Balance <span id="amount" class="amount">@Model.Balance</span>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            @Model.SelectedNetworkStr
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            @{
+                                foreach (var network in Model.Networks)
+                                {
+                                    <li>
+                                        <a asp-controller="@Model.Curent" asp-action="Index" asp-route-network="@network.ToString().ToLower()">
+                                            @Html.Raw(Money.CentPrefix)@network.ToString().ToUpper()
+                                        </a>
+                                    </li>
+                                }
+                            }
+
+                        </ul>
+                    </li>
+
+                    @{
+                        if (Model.SelectedNetwork != Network.FREE)
+                        {
+
+                            <li>
+                                <a asp-controller="Deposit" asp-action="Index" asp-route-network="@selectedNetwork.ToLower()">Deposit</a>
+                            </li>
+
+                            <li>
+                                <a asp-controller="Withdraw" asp-action="Index" asp-route-network="@selectedNetwork.ToLower()">Withdraw</a>
+                            </li>
+                        }
+                    }
+
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Logged as @User.Identity.Name<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a asp-controller="Help" asp-action="Faq">FAQ</a></li>
+                            <li><a asp-controller="Help" asp-action="Support">Support</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            }
+
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+ 
+    @if (Model.IsAuthenticated)
+    {
+        <script type="text/javascript">
+            let balanceHub = new signalR.HubConnection('/balance');
+            balanceHub.on('balanceUpdated', data => {
+                if ('@Model.SelectedNetwork.ToString().ToLower()' === data.Network) {
+                    document.getElementById("amount").textContent = data.Amount;
+                }
+            });
+
+            balanceHub.start();
+        </script>
+    }
+ 

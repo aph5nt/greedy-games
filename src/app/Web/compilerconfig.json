@@ -1,0 +1,38 @@
+﻿[
+  {
+    "outputFile": "wwwroot/css/minefield/board.css",
+    "inputFile": "wwwroot/css/minefield/board.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/minefield/field.css",
+    "inputFile": "wwwroot/css/minefield/field.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/minefield/multipier.css",
+    "inputFile": "wwwroot/css/minefield/multipier.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/minefield/settings.css",
+    "inputFile": "wwwroot/css/minefield/settings.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/minefield/takeaway.css",
+    "inputFile": "wwwroot/css/minefield/takeaway.scss"
+  },
+  {
+    "outputFile": "ClientApp/app/components/field/field.component.css",
+    "inputFile": "ClientApp/app/components/field/field.component.scss"
+  },
+  {
+    "outputFile": "ClientApp/app/_variables.css",
+    "inputFile": "ClientApp/app/_variables.scss"
+  },
+  {
+    "outputFile": "ClientApp/app/components/multipier/multipier.component.css",
+    "inputFile": "ClientApp/app/components/multipier/multipier.component.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/minefield/game.preview.css",
+    "inputFile": "wwwroot/css/minefield/game.preview.scss"
+  }
+]

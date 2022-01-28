@@ -1,0 +1,13 @@
+@import '../../../../_variables';
+
+.result {
+    display: block;
+    margin: auto;
+    width: 200px;
+    border: 0px;
+
+    position: absolute;
+    bottom: 50px;
+    left: ($board-width /2) - 134px;
+}
+ 

@@ -1,0 +1,139 @@
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    <div class="card">
+      <div class="card-header">
+        Withdraws
+      </div>
+
+      <div class="card-body">
+
+        <div class="row">
+          <div class="col-md-5">
+            <h6 class="card-subtitle mb-2 text-muted">Submit withdraw</h6>
+            <form novalidate name="withdrawForm" [formGroup]="withdrawForm" (ngSubmit)="toggleWithdraw(withdrawForm.value)" class="form">
+              <fieldset>
+
+                <div class="form-group" [ngClass]="{'has-error': (withdrawForm.controls['destinationAddress'].touched || withdrawForm.controls['destinationAddress'].dirty) && !withdrawForm.controls['destinationAddress'].valid }">
+                  <label for="destinationAddress">Destination address</label>
+                  <input class="form-control form-control-sm" type="text" name="destinationAddress" [formControl]="withdrawForm.controls['destinationAddress']"
+                  />
+                  <span class="help-block" *ngIf="(withdrawForm.controls['destinationAddress'].touched || withdrawForm.controls['destinationAddress'].dirty ) &&  !withdrawForm.controls['destinationAddress'].valid">
+                    <span *ngIf="withdrawForm.controls['destinationAddress'].hasError('required')" class="invalid">
+                      Destination address is required.
+                    </span>
+                    <span *ngIf="withdrawForm.controls['destinationAddress'].hasError('pattern')" class="invalid">
+                      Destination address is invalid.
+                    </span>
+                  </span>
+
+                </div>
+
+                <div class="form-group" [ngClass]="{'has-error': (withdrawForm.controls['amount'].touched || withdrawForm.controls['amount'].dirty) && !withdrawForm.controls['amount'].valid }">
+                  <label for="amount">Amount</label>
+                  <input name="amount" type="number" class="form-control form-control-sm" [formControl]="withdrawForm.controls['amount']" min="networkFee"
+                    max="max()" step="0.00001" />
+                  <h6 *ngIf="withdrawForm.controls['amount'].valid">You will receive {{willReceive()}} {{network |uppercase}} after substracting {{networkFee}} {{network |uppercase}}
+                    of the network fee. </h6>
+                  <span class="help-block" *ngIf="(withdrawForm.controls['amount'].touched || withdrawForm.controls['amount'].dirty ) &&  !withdrawForm.controls['amount'].valid">
+                    <span *ngIf="withdrawForm.controls['amount'].hasError('required')" class="invalid">
+                      Amount field is required.
+                    </span>
+                    <span *ngIf="withdrawForm.controls['amount'].hasError('min')" class="invalid">
+                      Amount must be greater than {{networkFee}} {{network |uppercase}} network fee.
+                    </span>
+
+                    <span *ngIf="withdrawForm.controls['amount'].hasError('max')" class="invalid">
+                      Not enougth funds for withdraw. Maximum spendable amount is {{willReceive()}} {{network | uppercase }}
+                    </span>
+                  </span>
+                </div>
+
+                <div class="form-group" [ngClass]="{'has-error': (withdrawForm.controls['password'].touched || withdrawForm.controls['password'].dirty) && !withdrawForm.controls['password'].valid }">
+                  <label for="password">Password</label>
+                  <input name="password" type="password" class="form-control form-control-sm" [formControl]="withdrawForm.controls['password']"
+                  />
+                  <span class="help-block" *ngIf="(withdrawForm.controls['password'].touched || withdrawForm.controls['password'].dirty ) &&  !withdrawForm.controls['password'].valid">
+                    <span *ngIf="withdrawForm.controls['password'].hasError('required')" class="invalid">
+                      Password is required.
+                    </span>
+
+                    <span *ngIf="withdrawForm.controls['password'].hasError('minlength')" class="invalid">
+                      Password is invalid.
+                    </span>
+                  </span>
+
+                </div>
+
+                <div class="form-group" [ngClass]="{'has-error': (withdrawForm.controls['confirmationCode'].touched || withdrawForm.controls['confirmationCode'].dirty) && !withdrawForm.controls['confirmationCode'].valid }">
+                  <label for="confirmationCode">2FA Code</label>
+                  <input name="confirmationCode" type="text" class="form-control form-control-sm" [formControl]="withdrawForm.controls['confirmationCode']"
+                  />
+                  <span class="help-block" *ngIf="(withdrawForm.controls['confirmationCode'].touched || withdrawForm.controls['confirmationCode'].dirty ) &&  !withdrawForm.controls['confirmationCode'].valid">
+                    <span *ngIf="withdrawForm.controls['confirmationCode'].hasError('required')" class="invalid">
+                      2FA Code is required.
+                    </span>
+
+                    <span *ngIf="withdrawForm.controls['confirmationCode'].hasError('pattern')" class="invalid">
+                      2FA Code has invalid format.
+                    </span>
+                  </span>
+
+                </div>
+
+                <div class="form-group">
+                  <button type="submit" [disabled]="!withdrawForm.valid" class="btn btn-default">Withdraw</button>
+                </div>
+
+              </fieldset>
+            </form>
+          </div>
+
+          <div class="col-md-7">
+            <h6 class="card-subtitle mb-2 text-muted">History</h6>
+            <div style="margin:20px;">
+              <table *ngIf="result?.data.length > 0" class="table table-sm table-hover">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tr *ngFor="let item of result?.data" (click)="togglePreview($event, item)">
+                  <td>{{item.updatedAt}}</td>
+                  <td>{{item.amount}} {{network | uppercase }}</td>
+                  <td>{{item.tranStatus}}</td>
+                </tr>
+              </table>
+
+              <p *ngIf="result?.data.length === 0">
+                No records
+              </p>
+
+              <nav class="nav justify-content-end">
+                <ul class="pagination pagination-sm">
+
+                  <li class="page-item" [ngClass]="{'disabled':!result?.hasPreviousPage}">
+                    <a class="page-link" routerLink="/{{network}}/statistics" [queryParams]="{showAll: showAll, page: result?.pageIndex-1}">«</a>
+                  </li>
+
+                  <li class="page-item" [ngClass]="{'disabled':!result?.hasNextPage}">
+                    <a class="page-link" routerLink="/{{network}}/statistics" [queryParams]="{showAll: showAll, page: result?.pageIndex+1}">»</a>
+                  </li>
+
+                  <li class="page-item disabled">
+                    <a class="page-link"> {{result?.pageIndex}} / {{result?.totalPages}}</a>
+                  </li>
+
+                </ul>
+              </nav>
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

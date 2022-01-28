@@ -1,0 +1,35 @@
+﻿akka {  
+	log-config-on-start = on
+	stdout-loglevel = DEBUG
+	loglevel = DEBUG
+
+	loggers = ["Akka.Logger.Serilog.SerilogLogger, Akka.Logger.Serilog"]
+
+    actor {
+		serializers {
+		  hyperion = "Akka.Serialization.HyperionSerializer, Akka.Serialization.Hyperion"
+		}
+		serialization-bindings {
+		  "System.Object" = hyperion
+		}
+        provider = remote
+		debug {
+            receive = on
+            autoreceive = on
+            lifecycle = on
+            event-stream = on
+            unhandled = on
+          }
+
+    }
+    remote {
+        dot-netty.tcp {
+            port = #port
+            hostname = #hostname
+			public-hostname = #publicHostname
+        }
+    }
+}
+balance-priority-mailbox {
+        mailbox-type : "Payment.Actors.BalancePriorityMailbox, Payment"
+      }

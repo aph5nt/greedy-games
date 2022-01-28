@@ -1,0 +1,90 @@
+﻿@model Game.Minefield.Storage.LogDto
+@using Game.Minefield.Contracts.Model
+@using Microsoft.EntityFrameworkCore
+@using Web.Controllers
+@{
+    ViewData["Title"] = "Statistics";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel">
+
+            <div class="panel-heading"><backbutton></backbutton> Game details</div>
+            <div class="panel-body">
+                <div>
+                    <div class="tab-content">
+                        <form>
+                            <fieldset disabled>
+                                <div class="form-group">
+                                    <label>Game Id</label>
+                                    <input type="text" class="form-control" disabled value="@Model.GameId">
+                                </div>
+                                <div class="form-group">
+                                    <label>Client seed</label>
+                                    <input type="text" class="form-control" disabled value="@Model.ClientSeed">
+                                </div>
+                                <div class="form-group">
+                                    <label>Server seed</label>
+                                    <input type="text" class="form-control" disabled value="@Model.ServerSeed">
+                                </div>
+                                <div class="form-group">
+                                    <label>Game pattern</label>
+                                    <input type="text" class="form-control" disabled value="@Model.Value">
+                                </div>
+                            </fieldset>
+                        </form>
+                        <br />
+                        
+                        <!-- app-gameLogPreview -->
+                        <div class="row board-container preview-background">
+
+                            <img src="/images/location.svg" class="board" />
+                            <div>
+                                @foreach (var field in Model.UserState.Board)
+                                {
+                                    //var canStepOnClass = field.CanStepOn ? "canStepOn" : "";
+                                    var steppedOnClass = field.SteppedOn ? "steppedOn" : "";
+                                    <div class="@steppedOnClass @field.State.ToString().ToLower()-@Model.UserState.FieldSize.Columns-@Model.UserState.FieldSize.Rows-@field.ColumnIndex-@field.RowIndex"></div>
+                                }
+                            </div>
+                            
+                            <div>
+                                @for (int i =0; i < Model.UserState.FieldSize.Columns; i++)
+                                {
+                                    <div class="multipier-@Model.UserState.FieldSize.Columns-@Model.UserState.FieldSize.Rows-@i">
+                                        <div class="multipier-text-@Model.UserState.FieldSize.Columns">x @Model.UserState.FieldSize.Multipiers[i]</div>
+                                    </div>
+                                }
+                            </div>
+                           
+                            @if (Model.UserState.Status != Status.Dead)
+                            {
+                                <img src="/images/win.svg" class="result"/>
+                            }
+                            else
+                            {
+                                <img src="/images/lose.svg" class="result" />
+                            }
+                           
+                        </div>
+                        <br/>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/panel.common.css">
+    <link rel="stylesheet" href="~/css/table.css">
+    <link rel="stylesheet" href="~/css/minefield/game.preview.css">
+}
+
+@section Scripts {
+    <script src="~/js/panel.js"></script>
+}

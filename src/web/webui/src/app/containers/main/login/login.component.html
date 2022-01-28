@@ -1,0 +1,78 @@
+<div class="modal fade" #loginModal id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title text-center">Login</h4>
+            <h6 class="card-subtitle mb-2 text-muted text-center">Please provide your credentials</h6>
+            <div class="row">
+
+              <div class="col-12">
+                <form novalidate name="loginForm" [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)" class="form">
+                  <fieldset>
+
+                    <div class="form-group">
+                      <div *ngIf="failedToLogin" class="alert alert-danger" role="alert">
+                        Failed to login.
+                      </div>
+                    </div>
+
+                    <div class="form-group" [ngClass]="{'has-error': (loginForm.controls['userName'].touched || loginForm.controls['userName'].dirty) && !loginForm.controls['userName'].valid }">
+                      <label for="userName">User name</label>
+                      <input class="form-control form-control-sm" type="text" name="userName" [formControl]="loginForm.controls['userName']" />
+                      <span class="help-block" *ngIf="(loginForm.controls['userName'].touched || loginForm.controls['userName'].dirty ) &&  !loginForm.controls['userName'].valid">
+                        <span *ngIf="loginForm.controls['userName'].hasError('required')" class="invalid">
+                          Login is required.
+                        </span>
+                      </span>
+                    </div>
+
+                    <div class="form-group" [ngClass]="{'has-error': (loginForm.controls['password'].touched || loginForm.controls['password'].dirty) && !loginForm.controls['password'].valid }">
+                      <label for="password">Password</label>
+                      <input name="password" type="password" class="form-control form-control-sm" [formControl]="loginForm.controls['password']"
+                      />
+                      <span class="help-block" *ngIf="(loginForm.controls['password'].touched || loginForm.controls['password'].dirty ) &&  !loginForm.controls['password'].valid">
+                        <span *ngIf="loginForm.controls['password'].hasError('required')" class="invalid">
+                          Password is required.
+                        </span>
+                      </span>
+                    </div>
+
+                    <div class="form-group" [ngClass]="{'has-error': (loginForm.controls['twoFactorAuthCode'].touched || loginForm.controls['twoFactorAuthCode'].dirty) && !loginForm.controls['twoFactorAuthCode'].valid }">
+                      <label for="twoFactorAuthCode">2FA Code <span class="text-muted">(fill this field if you have setup 2FA)</span></label>
+                      <input name="twoFactorAuthCode" type="twoFactorAuthCode" class="form-control form-control-sm" [formControl]="loginForm.controls['twoFactorAuthCode']">
+
+                      <span class="help-block" *ngIf="!loginForm.controls['twoFactorAuthCode'].valid">
+                        <span *ngIf="loginForm.controls['twoFactorAuthCode'].hasError('pattern')" class="invalid">
+                          2FA Code has invalid format.
+                        </span>
+                      </span>
+
+                    </div>
+
+
+                    <div class="form-group">
+                      <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary">Login</button>
+                      <a (click)="close()" class="btn btn-light">Cancel</a>
+                    </div>
+
+                  </fieldset>
+                </form>
+              </div>
+
+
+
+
+
+
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

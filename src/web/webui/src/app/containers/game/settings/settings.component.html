@@ -1,0 +1,47 @@
+<form novalidate *ngIf="canStart()" (ngSubmit)="startGameToggle()" #startGameForm="ngForm" class="form-inline">
+
+    <div class="col-2 offset-1">
+        <div class="form-group">
+            <label class="settingLabel" for="fieldSize">Field size</label>
+            <div id="fieldSize">
+                <div class="dropup">
+                    <button class="dropdown-toggle btn btn-fieldSize" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        {{model.fieldSize.display}}
+                        <span class="caret"></span>
+                    </button>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <div *ngFor="let item of fieldSizes">
+                            <a class="dropdown-item" routerLink="/{{model.network}}/minefield/{{item.size}}" (click)="sizeChangeToggle(item)"> {{item.display}}</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-2">
+        <div class="form-group">
+            <label class="settingLabel" for="betAmount">Bet amount &cent;</label>
+            <div id="betAmount">
+                <input [(ngModel)]="bet" name="bet" id="bet" #name="ngModel" type="number" class="form-control" placeholder="100" [min]="model.min"
+                    [max]="model.max" step="1">
+            </div>
+
+        </div>
+    </div>
+    <div class="col-6">
+        <br/>
+        <div class="form-group">
+            <label class="settingLabelButtons" for="buttons">Actions</label>
+            <div id="buttons">
+                <button type="button" (click)="x12()" class="btn btn-adjust"> 1/2 </button>
+                <button type="button" (click)="x2()" class="btn btn-adjust"> x2 </button>
+                <button type="button" (click)="max()" class="btn btn-adjust"> max </button>
+                <button type="submit" class="btn btn-start">Start game</button>
+            </div>
+        </div>
+    </div>
+
+</form>

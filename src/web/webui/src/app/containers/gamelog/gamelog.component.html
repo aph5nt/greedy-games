@@ -1,0 +1,123 @@
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    <div class="card">
+      <div class="card-header">
+          <app-backbutton></app-backbutton> Game Details
+
+       
+      </div>
+      <div class="card-body">
+        <div class="row">
+
+          <div class="col-6">
+
+            <div class="row">
+              <div class=col-3>
+                <p>Game Id:</p>
+              </div>
+              <div class=col>
+                <p>{{log.gameId}}</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class=col-3>
+                <p>Client seed:</p>
+              </div>
+              <div class=col>
+                <p>{{log.clientSeed}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class=col-3>
+                <p>Server seed:</p>
+              </div>
+              <div class=col>
+                <p>{{log.serverSeed}}</p>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class=col-3>
+                <p>Pattern:</p>
+              </div>
+              <div class=col>
+                <p>{{log.value}}</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class=col-3>
+                <p>User name</p>
+              </div>
+              <div class=col>
+                <p>{{statistic.userName}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class=col-3>
+                <p>Played at:</p>
+              </div>
+              <div class=col>
+                <p>{{helpers.toLocalTime(statistic.createdAt)}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class=col-3>
+                <p>Field size</p>
+              </div>
+              <div class=col>
+                <p>{{statistic.size}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class=col-3>
+                <p>Moves</p>
+              </div>
+              <div class=col>
+                <p>{{statistic.turn}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class=col-3>
+                <p>Bet</p>
+              </div>
+              <div class=col>
+                <p>{{statistic.bet | centbit }} &cent;</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class=col-3>
+                <p>Profit</p>
+              </div>
+              <div class=col>
+                <p [ngStyle]="{'color':statistic.win > 0 ? 'green' : 'red' }">{{helpers.showProfit(statistic)}} &cent;</p>
+              </div>
+            </div>
+
+
+
+
+          </div>
+
+
+          <div class="row">
+
+            <div class=col-6>
+              <app-gamepreview [userState]="userState" [fieldSize]="userState?.fieldSize"></app-gamepreview>
+            </div>
+
+
+
+
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>

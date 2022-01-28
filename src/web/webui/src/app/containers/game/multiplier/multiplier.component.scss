@@ -1,0 +1,36 @@
+@import '../../../../variables';
+
+.multipier {
+    position: absolute;
+    display: block;
+}
+ 
+@mixin multipier-mixin($columns, $row, $multipierHeight, $fieldSize, $fromLeft) {
+    
+    [class*='multipier-#{$columns}-#{$row}'] {
+        @extend .multipier;
+        width: $fieldSize;
+        height: $multipierHeight;
+        background-color: #474748;
+        border-radius: 6px;
+    }
+
+    .multipier-text-#{$columns} {
+        font-size: 11px;
+        line-height: $multipierHeight;
+        
+        color: white;
+        text-align: center;
+    }
+   
+    @for $c from 0 through $columns {      
+        .multipier-#{$columns}-#{$row}-#{$c} {      
+            top:  $field-start-top + (($row) * ($fieldSize + $fieldMargin));
+            left: $fromLeft + $field-start-left + ($c * ($fieldSize + $fieldMargin));
+        } 
+    }   
+} 
+
+@include multipier-mixin(3, 2, 20px, 110px, 90px);
+@include multipier-mixin(6, 3, 20px, 70px, 30px);
+@include multipier-mixin(9, 4, 20px, 50px, 0px);

@@ -1,0 +1,27 @@
+.chat{
+    max-height: 99vh;
+    min-height: 92vh;
+    opacity: 0.6;
+    background-color: #1f65a1;
+   
+}
+ 
+.chat > .footer {
+    position: absolute;
+    padding:5px;
+    margin-bottom: 5px;
+    width: 100%;
+    bottom: 0;
+}
+
+.content {
+    margin-left: 0px;
+    -webkit-padding-start: 0px;
+}
+
+.content > li {
+    list-style-type: none;
+    font-size: 13px;
+    color: white;
+    word-wrap: break-word;
+}

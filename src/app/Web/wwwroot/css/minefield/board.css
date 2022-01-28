@@ -1,0 +1,11 @@
+﻿.board-container {
+  position: relative;
+  margin: auto;
+  width: 900px; }
+
+.board {
+  display: block;
+  margin: auto;
+  width: 900px;
+  border: 0px; }
+

@@ -1,0 +1,27 @@
+@import '_variables';
+@import '../node_modules/bootstrap/scss/bootstrap';
+@import "~font-awesome/css/font-awesome.css";
+
+html {
+    position: relative;
+    min-height: 100%;
+  }
+  
+body {
+    min-height: 100%;
+    overflow-y: hidden;
+    background-image:    url(assets/images/background.jpg);
+    background-size:     cover;                      /* <------ */
+    background-repeat:   no-repeat;
+    background-position: center center;              /* optional, center the image */
+
+     margin-bottom: 60px; /* Margin bottom by footer height */
+}
+
+.card-header {
+  color: white;
+}
+
+.invalid {
+  color: #dc3545;
+}

@@ -1,0 +1,104 @@
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header">
+                Two factor authentication
+            </div>
+
+            <div class="card-body">
+                <div *ngIf="showResetForm">
+                    <div class="row">
+                        <div class="col">
+                            <h6 class="card-subtitle mb-2 text-muted">Disable 2FA</h6>
+                            <p style="color: red;">For your account safety, please do not uninstall Google Authenticator or untie Google 2-FA, otherwise there is a risk of account and asset stolen.</p>
+
+                            <form class="form-inline" novalidate name="disableForm" [formGroup]="disableForm" (ngSubmit)="toggleDisable(disableForm.value)">
+                                <div class="form-row">
+                                    <div class="col">
+                                        <input name="confirmationCode" placeholder="Confirmation code" class="form-control form-control-sm" [formControl]="disableForm.controls['confirmationCode']">
+                                    </div>
+                                    <div class="col">
+                                        <button type="submit" [disabled]="!disableForm.valid" class="btn btn-default">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="showConfirmationForm">
+                    <div class="row">
+
+                        <div class="col">
+                            <h5 style="color: green;">It is required to activate two factor authentication before using other networks than FREE. Please follow the instructions below:</h5>
+                            <br />
+                            <h6 class="card-subtitle mb-2 font-weight-bold">1. Install Google Authenticator</h6>
+                            <p>Before you setup the 2FA, you have to install Google Authenticator app on your mobile phone.</p>
+                            <div class="row">
+                                <div class="col">
+
+                                    <a target="_blank" href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2">
+                                        <img class="center-block" src="/assets/images/googleplay.svg">
+                                    </a>
+                                </div>
+
+                                <div class="col">
+                                    <a target="_blank" href="https://itunes.apple.com/app/google-authenticator/id388497605">
+                                        <img class="center-block" src="/assets/images/appstore.svg">
+                                    </a>
+                                </div>
+                            </div>
+                            <br/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <h6 class="card-subtitle mb-2 font-weight-bold">2. Back up the secret key</h6>
+                            <p>
+                                Be sure to back up your 2-step secret key
+                                <span style="color:red; font-weight: bold"> {{manualSetupKey}} </span>. When you change your phone, or accidentally uninstall Google
+                                Authenticator, you can retrieve Google authentication through this key, or your account will
+                                not be able to log in!
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <h6 class="card-subtitle mb-2 font-weight-bold">4. Scan QR code with Google Authenticator app</h6>
+                            <p>
+                                Open Google Authenticator app on your mobile phone and scan the QR code bellow.
+                            </p>
+
+                            <p>
+                                <img class="center-block" src="{{qrCodeImage}}">
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <h6 class="card-subtitle mb-2 font-weight-bold">5. Bind 2-step verification</h6>
+                            <p>
+                                Put the verification code from Google Authenticator into field bellow and submit.
+                            </p>
+
+                            <form class="form-inline" novalidate name="confirmationForm" [formGroup]="confirmationForm" (ngSubmit)="toggleEnable(confirmationForm.value)">
+                                <div class="form-row">
+                                    <div class="col">
+                                        <input name="confirmationCode" placeholder="Confirmation code" class="form-control form-control-sm" [formControl]="confirmationForm.controls['confirmationCode']">
+                                    </div>
+                                    <div class="col">
+                                        <button type="submit" [disabled]="!confirmationForm.valid" class="btn btn-default">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

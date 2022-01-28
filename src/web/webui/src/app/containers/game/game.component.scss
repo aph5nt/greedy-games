@@ -1,0 +1,18 @@
+@import '../../../variables';
+
+.board-container {
+    position:relative;
+    margin: auto;
+    width: $board-width;
+    min-height: 500px;
+}
+
+.board {
+    display: block;
+    margin: auto;
+    width: $board-width;
+    left: -$board-start-point;
+    position: relative;
+    border: 0px;
+}
+ 

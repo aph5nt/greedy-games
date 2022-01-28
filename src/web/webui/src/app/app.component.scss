@@ -1,0 +1,40 @@
+body {
+    padding-top: 5rem;
+  }
+ 
+  .sidebar-link {
+    color: white;
+   
+  }
+
+  .container-fluid {
+    padding: 0px;
+ }
+
+ .main-container {
+  padding-left: 15px;
+  padding-top: 10px;
+ }
+ 
+
+  /* change transition animation to width when entire sidebar is toggled */
+  #sidebar.collapse {
+  -webkit-transition-timing-function: ease;
+       -o-transition-timing-function: ease;
+          transition-timing-function: ease;
+  -webkit-transition-duration: .2s;
+       -o-transition-duration: .2s;
+          transition-duration: .2s;
+  }
+  
+  #sidebar.collapsing {
+  opacity: 1;
+  width: 0;
+  -webkit-transition-timing-function: ease-in;
+       -o-transition-timing-function: ease-in;
+          transition-timing-function: ease-in;
+  -webkit-transition-property: width;
+       -o-transition-property: width;
+          transition-property: width;
+  
+  }

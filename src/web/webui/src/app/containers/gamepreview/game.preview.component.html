@@ -1,0 +1,25 @@
+<div class="row board-container preview-background">
+
+    <img class="board" src="..\..\assets\images\location.svg">
+
+    <div *ngFor="let field of userState?.board;">
+        <div class="{{field.state.toString()}}-{{fieldSize.columns}}-{{fieldSize.rows}}-{{field.columnIndex}}-{{field.rowIndex}}"
+            [ngClass]="{'canStepOn': field.canStepOn, 'steppedOn' : field.steppedOn }"></div>
+    </div>
+
+    <div *ngFor="let multipier of fieldSize?.multipiers; let i = index">
+        <div class="multipier-{{fieldSize.columns}}-{{fieldSize.rows}}-{{i}}">
+            <div class="multipier-text-{{fieldSize.columns}}">x {{multipier}}</div>
+        </div>
+    </div>
+
+    <div [hidden]="!showWin()">
+        <img src="../../assets/images/win.svg" class="result" />
+    </div>
+
+    <div [hidden]="!showLose()">
+        <img src="../../assets/images/lose.svg" class="result" />
+    </div>
+
+
+</div>

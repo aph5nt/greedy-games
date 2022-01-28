@@ -1,0 +1,40 @@
+﻿@addTagHelper *, PaulMiami.AspNetCore.Mvc.Recaptcha
+@{
+    ViewData["Title"] = "Register";
+}
+
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">New user</h3>
+            </div>
+            <div class="panel-body">
+                <form asp-route-returnUrl="@ViewData["ReturnUrl"]"  method="post" name="createUserForm" class="form-inline">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <fieldset>
+                        <p>
+                            Please confirm that you are not a robot and press the 'Create' button to create new user.
+                        </p>
+                        <div class="form-group">
+                            <recaptcha/>
+                        </div>
+                        <div class="form-group">
+                  
+                            <button type="submit" class="btn btn-default">Register</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <recaptcha-script />
+}
+@section Styles{ 
+    <link rel="stylesheet" href="~/css/panel.common.css"></link>
+}

@@ -1,0 +1,25 @@
+<div class="chat">
+
+  <div style="padding:5px;">
+    <div>
+      <p>Users online: {{onlineUsers}}</p>
+    </div>
+
+    <ul class="content">
+      <li *ngFor="let message of messages">
+        <font color="{{getUserName(message)}}">
+          <strong>{{getUserName(message)}}</strong>:
+        </font>
+        {{message.message}}
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="authState.isLogged" class="footer">
+    <form name="chatForm">
+      <textarea class="form-control sendBox" placeholder="Type your message here..." name="message" [(ngModel)]="message" (keyup.enter)="toggleSendMessage($event)">
+        </textarea>
+    </form>
+  </div>
+
+</div>

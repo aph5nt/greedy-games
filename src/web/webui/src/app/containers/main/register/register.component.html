@@ -1,0 +1,40 @@
+<div class="modal fade" #registerModal id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="card text-center">
+          <div class="card-body">
+            <h4 class="card-title">Welcome to Greedy Games!</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Please register in order to play</h6>
+            <p></p>
+            <div *ngIf="!beginRegistration">
+              <p class="card-text">
+                <button class="btn btn-warning" (click)="join()">
+                  <b>Join {{totalPlayers}} Players today</b>
+                </button>
+              </p>
+              <p class="card-text">
+                or
+                <a (click)="login()" class="card-link">Login here</a> if you joined that already!
+              </p>
+            </div>
+            <div *ngIf="beginRegistration">
+              <p>Please confirm that you are a human</p>
+              <form class="clearfix">
+                <div class="form-group row">
+                  <re-captcha class="recaptcha" [(ngModel)]="registerModel.captcha" name="captcha" required (resolved)="resolved($event)"
+                    #captchaControl="ngModel"></re-captcha>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-registered #registeredModal></app-registered>
+
+<app-login #loginModal></app-login>

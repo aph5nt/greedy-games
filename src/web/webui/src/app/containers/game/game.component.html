@@ -1,0 +1,21 @@
+<div class="row board-container">
+    <img src="..\..\assets\images\location.svg" class="board" />
+
+    <div *ngFor="let field of userState?.board;">
+        <game-field [field]='field' [fieldSize]='userState.fieldSize' (move)="move($event)">
+        </game-field>
+    </div>
+    <game-multipier [fieldSize]='userState.fieldSize'></game-multipier>
+
+    
+ 
+    <game-result [userState]='userState'></game-result>
+    <game-message [message]='errorMessage$'></game-message>
+    
+</div>
+
+<div class="row board-container">
+    <game-board-settings [model]="settings" (startGame)="startGame($event)" (sizeChanged)="changeSize($event)">
+    </game-board-settings>
+    <game-take-away [userState]='userState' (takeAway)="takeAway($event)"></game-take-away>
+</div>

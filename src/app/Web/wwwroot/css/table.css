@@ -1,0 +1,8 @@
+﻿
+        #table-list {
+            margin: 20px;    
+        }
+
+        #table-list table {
+            cursor: pointer;
+        }

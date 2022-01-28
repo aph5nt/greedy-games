@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Akka" Version="1.3.17" />
+    <PackageReference Include="Akka.Logger.Serilog" Version="1.3.10" />
+    <PackageReference Include="Akka.Remote" Version="1.3.17" />
+    <PackageReference Include="Akka.Serialization.Hyperion" Version="1.3.4-beta58" />
+    
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.1" />
+    
+    <PackageReference Include="Microsoft.Extensions.Configuration.AzureKeyVault" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="3.1.1" />
+    
+    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+    <PackageReference Include="Serilog.Sinks.RollingFileAlternate" Version="2.0.9" />
+    <PackageReference Include="Serilog.Sinks.Seq" Version="4.0.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.6.0" />
+
+  </ItemGroup>
+   
+  <ItemGroup>
+    <ProjectReference Include="..\..\common\Shared.Providers\Shared.Providers.csproj" />
+    <ProjectReference Include="..\..\common\Shared\Shared.csproj" />
+    <ProjectReference Include="..\..\gameapps\Game.Minefield.Contracts\Game.Minefield.Contracts.csproj" />
+    <ProjectReference Include="..\..\gameapps\Game.Minefield\Game.Minefield.csproj" />
+    <ProjectReference Include="..\Chat\Chat.Contracts\Chat.Contracts.csproj">
+      <Project>{37A0B05E-C4E9-466A-920C-44C2A0330A1E}</Project>
+      <Name>Chat.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Payment.Contracts\Payment.Contracts.csproj" />
+    <ProjectReference Include="..\Persistance\Persistance.csproj" />
+    <ProjectReference Include="..\WebApi.Configuration\WebApi.Configuration.csproj" />
+    <ProjectReference Include="..\WebApi.Providers\WebApi.Providers.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="webapi.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="webapi.Test.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="WebEndpoint.hocon">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="logs" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
+  </ItemGroup>
+</Project>

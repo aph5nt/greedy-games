@@ -1,0 +1,9 @@
+
+--------------------------------
+
+makecert -sv greedygamesdev.pvk -n "cn=greedygamesdev" greedygamesdev.cer -b 05/05/2017 -e 05/05/2020 -r pvk2pfx -pvk greedygamesdev.pvk -spc greedygamesdev.cer -pfx greedygamesdev.pfx -po greedygamesdev
+makecert -sv greedygamesdev.pvk -n "cn=greedygamesdev" greedygamesdev.cer -b 05/05/2017 -e 05/05/2020 -r -pe
+
+
+makecert -r -pe -n "CN=greedygamesdev" -b 05/05/2017 -e 05/05/2020 -sky exchange greedygamesdev.cer -sv greedygamesdev.pvk
+pvk2pfx.exe -pvk greedygamesdev.pvk -spc greedygamesdev.cer -pfx greedygamesdev.pfx

@@ -1,0 +1,140 @@
+$board-width: 550px;
+$field-start-top : 67px;
+$field-start-left : 122px;
+$multipierHeight : 12px;
+
+$fieldMargin: 6.1px;
+
+.result {
+    display: block;
+    margin: auto;
+    width: 122px;
+    border: 0px;
+    position: absolute;
+    bottom: 0px;
+    left: ($board-width /2) - 61px;
+}
+ 
+.preview-background {
+    background-image:    url(../../images/background.jpg);
+    background-size:     cover;                     
+    background-repeat:   no-repeat;
+    background-position: center center;              
+    margin-bottom: 0px;
+}
+
+.board-container {
+    position:relative;
+    margin: auto;
+    width: $board-width;
+}
+
+.board {
+    display: block;
+    margin: auto;
+    width: $board-width;
+    border: 0px;
+}
+
+.field {
+    position: absolute;
+    display: block;
+}
+
+// add base $left
+@mixin field-mixin($columns, $rows, $fieldSize, $fromLeft) {
+
+    .field-#{$columns}-#{$rows} {
+        @extend .field;
+        width: $fieldSize;
+        height: $fieldSize;
+    }
+ 
+    [class*='unknown-#{$columns}-#{$rows}-'] {
+        @extend .field-#{$columns}-#{$rows};
+        background-color: #C3D028;
+    }
+
+    .canStepOn:hover{
+        background-color:#ACBA1F !important;
+        cursor: pointer; cursor: hand;
+    }
+
+    .steppedOn {
+        background-color:#ACBA1F !important;
+    }
+
+    [class*='safe-#{$columns}-#{$rows}-'] {
+        @extend .field-#{$columns}-#{$rows};
+        background-color: #C3D028;
+        background-image:  url(../../images/coin.svg);
+        background-size: $fieldSize $fieldSize;
+        background-repeat: no-repeat;
+    }
+
+    [class*='mined-#{$columns}-#{$rows}-'] {
+        @extend .field-#{$columns}-#{$rows};
+        background-color: #C3D028;
+        background-image:  url(../../images/mushroom.svg);
+        background-size: $fieldSize $fieldSize;
+        background-repeat: no-repeat;
+    }
+ 
+    @for $c from 0 through $columns {      
+        @for $r from 0 through $rows {   
+            .unknown-#{$columns}-#{$rows}-#{$c}-#{$r} {         
+                top:  $field-start-top + ($r * ($fieldSize + $fieldMargin));;
+                left: $fromLeft + $field-start-left + ($c * ($fieldSize + $fieldMargin));
+            }
+            .safe-#{$columns}-#{$rows}-#{$c}-#{$r} {         
+                top:  $field-start-top + ($r * ($fieldSize + $fieldMargin));;
+                left: $fromLeft + $field-start-left + ($c * ($fieldSize + $fieldMargin));
+            }  
+            .mined-#{$columns}-#{$rows}-#{$c}-#{$r} {         
+                top:  $field-start-top + ($r * ($fieldSize + $fieldMargin));;
+                left: $fromLeft + $field-start-left + ($c * ($fieldSize + $fieldMargin));
+            }    
+        }
+    }
+}
+
+ 
+@include field-mixin(3, 2, 67.1px, 54.9px);
+@include field-mixin(6, 3, 42.7px, 18.3px);
+@include field-mixin(9, 4, 30.5px, 0px);
+ 
+ 
+.multipier {
+    position: absolute;
+    display: block;
+}
+ 
+@mixin multipier-mixin($columns, $row, $multipierHeight, $fieldSize, $fromLeft) {
+    
+    [class*='multipier-#{$columns}-#{$row}'] {
+        @extend .multipier;
+        width: $fieldSize;
+        height: $multipierHeight;
+        background-color: black;
+        border-radius: 3.66px;
+    }
+
+    .multipier-text-#{$columns} {
+        font-size: 6.71px;
+        line-height: $multipierHeight;
+        
+        color: white;
+        text-align: center;
+    }
+   
+    @for $c from 0 through $columns {      
+        .multipier-#{$columns}-#{$row}-#{$c} {      
+            top:  $field-start-top + (($row) * ($fieldSize + $fieldMargin));
+            left: $fromLeft + $field-start-left + ($c * ($fieldSize + $fieldMargin));
+        } 
+    }   
+} 
+
+@include multipier-mixin(3, 2, 20px, 67.1px, 54.9px);
+@include multipier-mixin(6, 3, 20px, 42.7px, 18.3px);
+@include multipier-mixin(9, 4, 20px, 30.5px, 0px);

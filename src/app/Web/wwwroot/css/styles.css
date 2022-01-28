@@ -1,0 +1,116 @@
+/* You can add global styles to this file, and also import other style files */
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+ 
+body {
+    background-image:    url(../images/background.jpg);
+    background-size:     cover;                      /* <------ */
+    background-repeat:   no-repeat;
+    background-position: center center;              /* optional, center the image */
+
+     margin-bottom: 60px; /* Margin bottom by footer height */
+}
+ 
+
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+
+  /* Set the fixed height of the footer here */
+  height: 33px;
+  background-color: #181e26;
+}
+
+
+.navbar {
+    background-color: #1f65a1;
+    background: transparent;
+    border-color: transparent;
+}
+
+.navbar li {
+     color: #fff;
+} 
+
+.navbar-default .navbar-nav > li > a {
+    color: #fff;
+}
+ 
+
+/* top navigation menu */
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+ color: white;
+ background-color: transparent;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    background-color: #9D9BFF;
+}
+ 
+
+/* NAV */
+.balance {
+    line-height: 20px;
+    position: relative;
+    display: block;
+    padding: 15px 0px;
+    margin-left: 0px;
+}
+
+    .balance .amount {
+        color: #ffcf40;
+    }
+
+.coinspot {
+    width: 33px;
+    margin-right: 15px;
+}
+
+.logo {
+    font-family: Helvetica;
+    font-size: 28px;
+    font-weight: bold;
+    color: white;
+}
+
+    .logo:hover {
+        color: white;
+        cursor: pointer;
+        cursor: hand;
+    }
+
+    .logo .run {
+        color: #ffcf40;
+    }
+
+
+.dropdown-menu {
+    background-color: #195FB4;
+}
+
+    .dropdown-menu > li > a {
+        color: white;
+    }
+
+a:hover {
+    cursor: pointer;
+}
+
+
+.board-container {
+    position: relative;
+    margin: auto;
+    width: $board-width;
+}
+
+.board {
+    display: block;
+    margin: auto;
+    width: $board-width;
+    border: 0px;
+}

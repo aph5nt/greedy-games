@@ -1,0 +1,118 @@
+<nav class="navbar navbar-expand navbar-dark">
+  <img src="..\..\assets\images\coinspot.svg" class="coinspot pull-left" />
+  <a class="navbar-brand" routerLink="/{{uiState.network}}" >
+    Greedy Games</a>
+
+  <div class="collapse navbar-collapse">
+
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/{{uiState.network}}/minefield/{{uiState.fieldSize.size}}">Play
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+       
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            Statistics
+            <span class="caret"></span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" routerLink="/{{uiState.network}}/statistics/daily" [queryParams]="{showAll: false}">Daily summary</a>
+              <a class="dropdown-item" routerLink="/{{uiState.network}}/statistics" [queryParams]="{showAll: false}">Latest games</a>
+          </div>
+        </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          Help
+          <span class="caret"></span>
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" >FAQ</a>
+          <a class="dropdown-item">Support</a>
+          <a class="dropdown-item" >Faircheck</a>
+        </div>
+      </li>
+
+    </ul>
+
+    <ul *ngIf="!authState.isLogged" class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" (click)="register()">
+          <i class="fa fa fa-user fa-1x" aria-hidden="true"></i> Register</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="login()">
+          <i class="fa fa fa-sign-in fa-1x" aria-hidden="true"></i> Login</a>
+      </li>
+    </ul>
+
+    <ul *ngIf="authState.isLogged" class="navbar-nav">
+
+      <li class="nav-item balance">
+        <a class="nav-link disabled"> Balance
+          <span class="amount">{{uiState.balances[uiState.network] | centbit }}</span>
+        </a>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a style="color:white" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <span>{{uiState.network | uppercase}}</span>
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a *ngFor="let network : of Networks" class="dropdown-item" routerLink="/{{network}}/{{uiState.page}}" RouterLinkActive="active">
+          {{network | uppercase}}</a>
+        </div>
+      </li>
+
+      <li class="divider-vertical"></li>
+
+      <li class="divider-vertical"></li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          <i class="fa fa fa-money fa-1x" aria-hidden="true"></i> FUNDS
+          <span class="caret"></span>
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a *ngIf="uiState.network !== 'free'" class="dropdown-item" routerLink="/{{uiState.network}}/deposit" RouterLinkActivate="active">Deposit</a>
+          <a *ngIf="uiState.network !== 'free'" class="dropdown-item" routerLink="/{{uiState.network}}/withdraw" RouterLinkActivate="active">Withdraw</a>
+          <a class="dropdown-item" routerLink="/{{uiState.network}}/bankroll" RouterLinkActivate="active">Bankroll</a>
+        </div>
+      </li>
+
+
+      <li class="divider-vertical"></li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          <i class="fa  fa-user-circle-o fa-1x" aria-hidden="true"></i> {{authState.userName}}
+          <span class="caret"></span>
+        </a>
+
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" routerLink="/changepassword">Change password</a>
+          <a class="dropdown-item" routerLink="/2fasetup">2 Factor Auth</a>
+          <li role="separator" class="divider"></li>
+          <a class="dropdown-item" (click)="logout()">Log off</a>
+        </div>
+      </li>
+
+
+
+
+    </ul>
+
+  </div>
+</nav>
+
+<app-register #registerModal></app-register>
+<app-login #loginModal></app-login>

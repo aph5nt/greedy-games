@@ -1,0 +1,36 @@
+{
+  "name": "clipboard.js",
+  "main": "clipboard.js",
+  "version": "0.3.5",
+  "homepage": "https://github.com/lgarron/clipboard.js",
+  "authors": [
+    "code@garron.net"
+  ],
+  "description": "A web shim to handle clipboard APIs across browsers using a simple Promise API.",
+  "moduleType": [],
+  "ignore": [
+    "index.html"
+  ],
+  "keywords": [
+    "clipboard",
+    "HTML5",
+    "copy",
+    "copying",
+    "cut",
+    "paste",
+    "execCommand",
+    "setData",
+    "getData"
+  ],
+  "license": "MIT",
+  "_release": "0.3.5",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.3.5",
+    "commit": "91f772fdbce2568bb29b376f2bbcb7cf5907dbcd"
+  },
+  "_source": "https://github.com/lgarron/clipboard.js.git",
+  "_target": "v0.3.5",
+  "_originalSource": "clipboard.js",
+  "_direct": true
+}

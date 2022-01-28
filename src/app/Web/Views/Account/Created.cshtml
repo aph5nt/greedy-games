@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewData["Title"] = "Created";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+ 
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">New user</h3>
+            </div>
+            <div class="panel-body">
+                <div>
+
+                    <h5>
+                        <b>Please write down your the credentials</b>
+                    </h5>
+
+                    <br />
+
+                    <form class="form">
+                        <fieldset>
+
+                            <div class="form-group">
+                                <label for="secretUrl">Secret url</label>
+                                <div class="input-group">
+                                    <input class="form-control text" type="text" id="authUrl" name="authUrl" value="@ViewBag.AuthUrl" disabled />
+                                    <div class="input-group-addon">
+                        
+                                        <a href="#" id="copyUrlTooltip" title="Copied..." data-placement="top">
+                                            <i class="fa fa-clipboard" aria-hidden="true"></i>
+                                        </a>
+
+                                    </div>
+                                </div>
+                
+                            </div>
+            
+                            <div class="form-group">
+                                <label for="userName">User name</label>
+                                <input class="form-control text" type="text" name="userName" value="@ViewBag.UserName" disabled />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input class="form-control text" type="text" name="password" value="@ViewBag.Password" disabled />
+                            </div>
+
+                        </fieldset>
+                    </form>
+
+                    <ul>
+                        <li>Copy your secret url address and save it somewhere.</li>
+                        <li>Enter your url into the browser to login.</li>
+                    </ul>
+                    <br />
+                    <p><b>Once the url will be lost it will be impossible to get it back!</b></p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+
+
+@section Scripts {
+    <script type="text/javascript" src="~/js/created.js"></script>
+}
+@section Styles{ 
+    <link rel="stylesheet" href="~/css/panel.common.css"></link>
+}

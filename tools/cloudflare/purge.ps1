@@ -1,0 +1,1 @@
+﻿Invoke-WebRequest -Headers @{"Content-Type"="application/json"; "X-Auth-Key"="79617a2a1ae0d216d506849afe39dda916dea"; "X-Auth-Email"="netkmal@gmail.com"} -Body '{"purge_everything":true}' -Uri https://api.cloudflare.com/client/v4/zones/4f2eb7d810ebb4ac3027b42869381391/purge_cache -method DELETE

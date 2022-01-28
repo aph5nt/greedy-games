@@ -1,0 +1,122 @@
+﻿@addTagHelper *, PaulMiami.AspNetCore.Mvc.Recaptcha
+@using System.Globalization
+@model DepositViewModel
+@{
+    ViewData["Title"] = "Deposits";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+ 
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title"><backbutton></backbutton> Deposits</h3>
+            </div>
+            <div class="panel-body">
+                
+                @if (!Model.UserAccount.IsActive)
+                {
+                    <div>
+                        <form asp-controller="Deposit" asp-action="ActivateNetwork" method="post" class="form-inline">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <fieldset>
+                                <p>
+                                    Please confirm that you are not a robot and press the 'Activate' button to create the @Model.UserAccount.Network.ToString().ToUpper() deposit address.
+                                </p>
+                                <div class="form-group">
+                                    <recaptcha/>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-default">Activate</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                }
+                else
+                {
+                    <div>
+                        <form>
+                            
+                            <div id="qrCode"></div>
+                             
+                            <p style="text-align: center">
+                                @Model.UserAccount.Network.ToString().ToUpper() Address: @Model.UserAccount.DepositAddress
+                                <br/>
+                                <span class="small" style="text-align: center">
+                                    All deposits require 7 confirmation(s) before being credited.
+                                </span>
+                            </p>
+                        </form>
+                    </div>
+                }
+              @if (Model.UserAccount.IsActive)
+              {
+                  <vc:table-notification hub-name="deposit" is-activated="@Model.UserAccount.IsActive">
+                  </vc:table-notification>
+
+                  <div id="table-list" class='row'>
+                      
+                      @if (Model.Deposits.Count > 0)
+                      {
+                          <table class="table table-hover">
+                              <caption>History</caption>
+                              <thead>
+                              <tr>
+                                  <th>Date</th>
+                                  <th>Amount</th>
+                                  <th>Status</th>
+                              </tr>
+                              </thead>
+
+                              @foreach (var item in Model.Deposits)
+                              {
+                                  <tr tran-status="@item.Status"
+                                      tran-signature="@item.TransactionSignature"
+                                      network="@item.Network">
+                                      <td>@item.CreatedAt.ToShortDateString()</td>
+                                      <td><span amount="@item.Amount" network="@item.Network"></span></td>
+                                      <td>@item.Status.ToString()</td>
+                                  </tr>
+                              }
+
+                          </table>
+                      }
+                  </div>
+              }
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <recaptcha-script />
+    @if (Model.UserAccount.IsActive)
+    {
+        <script type="text/javascript" src="/lib/qrcode.min.js"></script>
+        <script type="text/javascript" src="/js/table.js"></script>
+        <script type="text/javascript" src="/js/panel.js"></script>
+        <script type="text/javascript">
+            new QRCode(document.getElementById("qrCode"),
+                {
+                    text: "@Html.Raw(Model.UserAccount.DepositAddress)",
+                    width: 200,
+                    height: 200
+                });
+        </script>
+    }
+}
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/panel.common.css">
+    <link rel="stylesheet" href="~/css/table.css">
+    <style type="text/css">
+        #qrCode  img {
+            margin: auto;
+            padding: 10px;
+        }
+    </style>
+}

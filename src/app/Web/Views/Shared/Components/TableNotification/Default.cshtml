@@ -1,0 +1,38 @@
+﻿@using Web.Views.Shared.Components.TableNotification
+@model Web.Views.Shared.Components.TableNotification.TableNotificationViewModel  
+@{
+    var id = Model.HubName + "Alert";
+    var hub = Model.HubName + "Hub";
+    var hubMethod = Model.HubName + "Updated";
+    var text = char.ToUpper(Model.HubName[0]) + Model.HubName.Substring(1) +"s";
+}
+@if (Model.IsActivated)
+{ 
+    <div id="@id" class="alert alert-info alert-dismissible" role="alert">
+        <strong>@text has been updated.</strong> Click here to refresh the page.
+    </div>
+
+    <script type="text/javascript">
+        $( document ).ready(function() {
+            $('#@id').hide();
+            $('#@id').click(function() {
+                location.reload();
+            });
+            let @hub = new signalR.HubConnection('/@Model.HubName');
+            @hub
+                .on('@hubMethod', data => {
+                    if('@Model.Network' === data.Network) {
+                        $('#@id').show(1000);
+                    }
+                });
+
+            @hub
+                .start()
+                .then(() => console.log('started!'));
+        });
+    </script>
+}
+  
+ 
+    
+ 

@@ -1,0 +1,74 @@
+version: "3.4"
+services:
+
+  logger:
+    container_name: logger
+    image: datalust/seq
+    expose:
+      - "5341"
+    ports:
+      - 8090:80
+      - 5341:5341
+    environment:
+      - ACCEPT_EULA=Y
+    volumes: 
+    - /volumes/seq/data:/data \
+
+  appserver:
+    container_name: appserver
+    build:
+      context: .
+      dockerfile: appserver.Dockerfile
+    expose:
+    - "4050"
+    ports:
+      - 80:8085
+    depends_on:
+    - "logger"
+    environment:
+    - LoggerUrl=http://10.10.140.1:5341
+    - Notifications:Url=http://10.10.140.1:80
+    - KeyVault:Vault=greedygamesdev
+    - KeyVault:ClientId=983cab6b-e473-4a00-a566-a7265fe44688
+    - KeyVault:ClientSecret=CtwJFP8msPNybgx3LVpHhrtt8ioFkZcl0AGs6OGVvmk=
+    - AkkaSettings:PublicHostname=appserver
+    - AkkaSettings:Hostname=0.0.0.0
+    - AkkaSettings:Port=4050
+
+  webapi:
+    container_name: webapi
+    build:
+      context: .
+      dockerfile: webapi.Dockerfile
+    expose:
+    - "4060"
+    ports:
+      - 80:80
+    depends_on:
+    - "logger"
+    - "appserver"
+    environment:
+    - LoggerUrl=http://10.10.141.1:5341
+    - KeyVault:Vault=greedygamesdev
+    - KeyVault:ClientId=983cab6b-e473-4a00-a566-a7265fe44688
+    - KeyVault:ClientSecret=CtwJFP8msPNybgx3LVpHhrtt8ioFkZcl0AGs6OGVvmk=
+    - AkkaSettings:PublicHostname=appserver
+    - AkkaSettings:Hostname=0.0.0.0
+    - AkkaSettings:Port=4060
+ 
+networks:
+  default:
+    external:
+      name: greedygames-network
+
+
+# chown root:docker /var/lib/gogs/psql
+# chmod 770 /var/lib/gogs/psql
+#todo: configuration variables --> use env variables --> use network variable
+
+ 
+# create build and release definitions
+# test vm: nginx locally, angular app ssh deployment; rest in docker
+# wiki manual how to isntall nginx, what to configure
+#how to make docker run at startup?
+#waves node upgrades

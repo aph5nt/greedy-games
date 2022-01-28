@@ -1,0 +1,17 @@
+﻿akka {  
+    actor {
+		serializers {
+		  hyperion = "Akka.Serialization.HyperionSerializer, Akka.Serialization.Hyperion"
+		}
+		serialization-bindings {
+		  "System.Object" = hyperion
+		}
+        provider = remote
+    }
+    remote {
+        dot-netty.tcp {
+            port = 0 # bound to a dynamic port assigned by the OS
+            hostname = #hostname
+        }
+    }
+}

@@ -1,0 +1,10 @@
+Color:
+Footer - > #181e26
+Start Game - > #1960b4
+Bet Button's -> #9d9bff
+xBet -> #181e26
+Balance amount -> #ffcf40
+
+
+Font:
+Helvetica Regular

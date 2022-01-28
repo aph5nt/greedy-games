@@ -1,0 +1,109 @@
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header">
+                Deposit
+            </div>
+ 
+            <div *ngIf="userAccount !== null && userAccount.isActive" class="card-body">
+
+
+                <div class="row">
+                    <div class="col-md-5">
+
+                        <h6 class="card-subtitle mb-2 text-muted">QR Code</h6>
+
+
+                        <form class="form">
+                            <div style="text-align: center">
+                                <app-qrcode [value]="userAccount.depositAddress" [padding]="20" [size]="350"></app-qrcode>
+                                <br />
+                            </div>
+
+                            <p style="text-align: center">
+                                {{network | uppercase}} Address:
+                                
+                                 <a href='http://wavesexplorer.com/address/{{userAccount.depositAddress}}' target="_blank">{{userAccount.depositAddress}}</a>
+                                
+                               
+                                <br/>
+                                <span class="small" style="text-align: center">
+                                    All deposits require 7 confirmation(s) before being credited.
+                                </span>
+                            </p>
+                        </form>
+                    </div>
+
+                    <div class="col-md-7">
+                        <h6 class="card-subtitle mb-2 text-muted">History</h6>
+                        <div style="margin:20px;">
+
+                            <table *ngIf="depositResult.data.length > 0" class="table table-sm table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tr *ngFor="let item of depositResult.data" (click)="togglePreview($event, item)">
+                                    <td>{{item.createdAt}}</td>
+                                    <td>{{item.amount}} {{network | uppercase }}</td>
+                                    <td>{{item.transStatus}}</td>
+                                </tr>
+                            </table>
+
+                            <p *ngIf="depositResult.data.length === 0">
+                                No records
+                            </p>
+
+                            <nav class="nav justify-content-end">
+                                <ul class="pagination pagination-sm">
+
+                                    <li class="page-item" [ngClass]="{'disabled':!result?.hasPreviousPage}">
+                                        <a class="page-link" routerLink="/{{network}}/statistics" [queryParams]="{page: depositResult?.pageIndex-1}">«</a>
+                                    </li>
+
+                                    <li class="page-item" [ngClass]="{'disabled':!result?.hasNextPage}">
+                                        <a class="page-link" routerLink="/{{network}}/statistics" [queryParams]="{page: depositResult?.pageIndex+1}">»</a>
+                                    </li>
+
+                                    <li class="page-item disabled">
+                                        <a class="page-link"> {{depositResult?.pageIndex}} / {{depositResult?.totalPages}}</a>
+
+                                    </li>
+
+                                </ul>
+                            </nav>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div *ngIf="userAccount !== null && !userAccount.isActive" class="card-body">
+                <div class="row">
+
+                    <div class="col-md-5">
+                        <h6 class="card-subtitle mb-2 text-muted">Network activation</h6>
+
+                        <p>Before activating {{network | uppercase}}, please confirm that you are a human</p>
+                        <form class="form">
+                            <div class="form-group">
+                                <re-captcha class="recaptcha" [(ngModel)]="activateModel.captcha" name="captcha" required (resolved)="resolved($event)" #captchaControl="ngModel"></re-captcha>
+                            </div>
+                        </form>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

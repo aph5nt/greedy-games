@@ -1,0 +1,21 @@
+<app-nav [uiState]="uiState" [authState]="authState"></app-nav>
+
+<main role="main" class="container-fluid">
+  <div class="row no-gutters">
+    <div class="col-2 collapse in" id="sidebar">
+      <app-chat></app-chat>
+    </div>
+
+    <div class="col main-container">
+      <a *ngIf="this.authService.isLoggedIn()" class="sidebar-link" href="#sidebar" data-toggle="collapse" (click)="ToggleChat()">
+        <i class="fa fa-comments-o fa-2x" aria-hidden="true"></i>
+      </a>
+
+      <router-outlet></router-outlet>
+     
+    </div>
+
+  </div>
+</main>
+
+<app-register #registerModal></app-register>

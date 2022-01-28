@@ -1,0 +1,53 @@
+﻿{
+  "ConnectionString": {
+    "Sql": "Server=tcp:greedygamessql.database.windows.net,1433;Initial Catalog=greedygamesdev;Persist Security Info=False;User ID=greedygames;Password=Tothemoon!;MultipleActiveResultSets=True;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+    "Storage": "DefaultEndpointsProtocol=https;AccountName=greedygamesdev;AccountKey=S6w6IcMJD7OtQ/l0m8Iwa04sd6oelOwq7rcv8qXxSJ74yvXB2FzV71uiMbsAt2QBgbDGKw3pWc7XTmei7jG4kQ==;EndpointSuffix=core.windows.net"
+  },
+  "KeyVault": {
+    "Vault": "greedygamesdev",
+    "ClientId": "983cab6b-e473-4a00-a566-a7265fe44688",
+    "ClientSecret": "CtwJFP8msPNybgx3LVpHhrtt8ioFkZcl0AGs6OGVvmk="
+  },
+  "Waves": {
+    "Node": {
+      "Url": "http://wavesnodetest.uksouth.cloudapp.azure.com:6869",
+      "ApiKey": ""
+    },
+    "Transaction": {
+      "Confirmations": 30,
+      "Fee": 1000000
+    } 
+  },
+  "Payments": {
+    "Networks": [
+      {
+        "Network": "WAVES",
+        "ProfitRatio": 0.2,
+        "ProfitAddress": "3PAXjDhqxXUBHSVXLHHtxrZNS5WHe24otHg",
+        "DividendAddress": "3PGqcxbWNW7mzVnHoVVbfXLPMEDcbXEWuWp",
+        "BankAddress": "3PKar79GubXfRBTSnRAMMbUqwvymavaKYJ5",
+        "BankDepositAddress": "3PFiW6gg1gKBF5twKy5jeXHchPRFp2egV6A",
+        "AssetId": ""
+      },
+      {
+        "Network": "GREEDYTEST",
+        "ProfitRatio": 0.2,
+        "ProfitAddress": "3P7SQfhDv8WZzLpq3WEy89BbeTR1guk8rAj",
+        "DividendAddress": "3PHrCd5tjjSBtuKQuzVqezxYf2qDbMfzq9i",
+        "BankAddress": "3PC5V2VDwg1Fks2ZYyTkoCQDPVfYiqeTYeg",
+        "BankDepositAddress": "3PNTHbCU3QjFQawSiXZTprga9ibUtuDC4Gb",
+        "AssetId": "3smetxU3pi27KgyapQHKdoS8LxDFtDV9QR67vnW6ZHDJ"
+      }
+    ]
+  },
+  "AkkaSettings": {
+    "Port": 8085,
+    "Hostname": "localhost",
+    "PublicHostname": "localhost"
+  },
+  "Notifications": {
+    "Url": "http://localhost:5000",
+    "UserName": "NotificationUser",
+    "UserPassword": "superdupersecretservertoken"
+  } 
+}

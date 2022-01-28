@@ -1,0 +1,48 @@
+<div class="modal fade" #userCreatedModal id="userCreatedModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="userCreatedModal"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="card text-center">
+          <div class="card-body">
+            <h4 class="card-title">Welcome {{userCreatedModel.userName}} !</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Please write down your credentials</h6>
+            <div class="row">
+              <div class="col-md-6 offset-md-2">
+                <form>
+                  <fieldset>
+                    <div class="form-row">
+                      <div class="col-6">
+                        <input type="text" readonly class="form-control-plaintext" value="User Name:">
+                      </div>
+                      <div class="col-6">
+                        <input type="text" readonly class="form-control-plaintext"  name="userName" #name="ngModel" [(ngModel)]="userCreatedModel.userName">
+                      </div>
+                    </div>
+
+                    <div class="form-row">
+                      <div class="col-6">
+                        <input type="text" readonly class="form-control-plaintext" value="Password: ">
+                      </div>
+                      <div class="col-6">
+                        <input type="text" readonly class="form-control-plaintext" name="password" #name="ngModel" [(ngModel)]="userCreatedModel.password">
+                      </div>
+                    </div>
+
+
+                  </fieldset>
+
+                </form>
+              </div>
+            </div>
+            <br/>
+            <button class="btn btn-success" (click)="close()">I have written down my credentials.</button>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

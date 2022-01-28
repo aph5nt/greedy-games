@@ -1,0 +1,13 @@
+﻿{
+  "ConnectionString": {
+    "Sql": "Server=tcp:greedygamessql.database.windows.net,1433;Initial Catalog=greedygamestest;Persist Security Info=False;User ID=greedygames;Password=Tothemoon!;MultipleActiveResultSets=True;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+    "Storage": "DefaultEndpointsProtocol=https;AccountName=greedygamestest;AccountKey=Ffsb10diolSu/4TQGGGWTTAbBpO+H9vrCzDJbzWxOr96Y4dloqb8OI0YXBP/ubSGVMh3iaYhA6dhl2B4xXPePA==;EndpointSuffix=core.windows.net"
+  },
+  "KeyVault": {
+    "Vault": "greedygamestest",
+    "ClientId": "9cd0848d-d817-48a4-b843-ba607a8ec0bd",
+    "ClientSecret": "eu2ebnfzvU8wKHAyRaxP09SBUY87MAZLFXfIww9RcQQ="
+  }
+  
+}
+

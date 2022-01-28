@@ -1,0 +1,32 @@
+﻿.btn-start {
+  color: white;
+  border-color: #195FB4;
+  background-color: #195FB4;
+  width: 120px; }
+
+.btn-adjust {
+  color: white;
+  border-color: #9D9BFF;
+  background-color: #9D9BFF;
+  width: 60px; }
+
+.btn-fieldSize {
+  color: white;
+  border-color: #195FB4;
+  background-color: #195FB4;
+  width: 120px; }
+
+.dropdown-menu {
+  background-color: #195FB4; }
+
+.dropdown-menu > li > a {
+  color: white; }
+
+.settingLabel {
+  color: white;
+  font-weight: normal; }
+
+.settingLabelButtons {
+  color: transparent;
+  font-weight: normal; }
+

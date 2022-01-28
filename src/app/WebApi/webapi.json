@@ -1,0 +1,44 @@
+﻿{
+  "ConnectionString": "Server=tcp:greedygamessql.database.windows.net,1433;Initial Catalog=greedygamesdev;Persist Security Info=False;User ID=greedygames;Password=Tothemoon!;MultipleActiveResultSets=True;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+  "Storage": "DefaultEndpointsProtocol=https;AccountName=greedygamesdev;AccountKey=S6w6IcMJD7OtQ/l0m8Iwa04sd6oelOwq7rcv8qXxSJ74yvXB2FzV71uiMbsAt2QBgbDGKw3pWc7XTmei7jG4kQ==;EndpointSuffix=core.windows.net",
+  "Recaptcha": {
+    "SiteKey": "6LdsYykTAAAAAKBL5ykTHozN8jhZVjUpxCFzrMo7",
+    "SecretKey": "6LdsYykTAAAAAO3Nkg1PZyP06n2CxaaTN8JT_An0"
+  },
+  
+  "KeyVault": {
+    "Vault": "greedygamesdev",
+    "ClientId": "983cab6b-e473-4a00-a566-a7265fe44688",
+    "ClientSecret": "CtwJFP8msPNybgx3LVpHhrtt8ioFkZcl0AGs6OGVvmk="
+  },
+  
+  "AkkaSettings": {
+    "Port": 8090,
+    "Hostname": "localhost",
+    "PublicHostname": "localhost",
+    "AppServerUrl": "akka.tcp://AppServer@localhost:8085",
+    "ActorTimeout": 30
+  },
+  "Withdraw": {
+    "MinAmount": 2000000,
+    "MaxAmount": 100000000000
+  },
+  "Tokens": {
+    "Audience": "http://localhost:5000",
+    "Issuer": "http://localhost:5000",
+    "Key": "supersecretpwd123supersecretpwd123supersecretpwd123"
+  },
+  "Notifications": {
+    "UserName": "NotificationUser",
+    "UserPassword": "superdupersecretservertoken"
+  },
+  "Session": {
+    "Idle": 30
+  },
+  "Logging": {
+    "IncludeScopes": false,
+    "LogLevel": {
+      "Default": "Warning"
+    }
+  }
+}

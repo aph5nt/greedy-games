@@ -1,0 +1,31 @@
+﻿akka {  
+    log-config-on-start = on
+    stdout-loglevel = DEBUG
+    loglevel = DEBUG
+        
+    loggers = ["Akka.Logger.Serilog.SerilogLogger, Akka.Logger.Serilog"]
+    
+    actor {
+		serializers {
+		  hyperion = "Akka.Serialization.HyperionSerializer, Akka.Serialization.Hyperion"
+		}
+		serialization-bindings {
+		  "System.Object" = hyperion
+		}
+        provider = remote
+        debug {
+            receive = on
+            autoreceive = on
+            lifecycle = on
+            event-stream = on
+            unhandled = on
+        }
+    }
+    remote {
+        log-received-messages = on
+        dot-netty.tcp {
+            port = 0 # bound to a dynamic port assigned by the OS
+            hostname = #hostname
+        }
+    }
+}

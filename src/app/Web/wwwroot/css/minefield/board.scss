@@ -1,0 +1,14 @@
+﻿@import '_variables';
+
+.board-container {
+    position: relative;
+    margin: auto;
+    width: $board-width;
+}
+
+.board {
+    display: block;
+    margin: auto;
+    width: $board-width;
+    border: 0px;
+}

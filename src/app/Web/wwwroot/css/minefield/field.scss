@@ -1,0 +1,69 @@
+@import '_variables';
+
+.field {
+    position: absolute;
+    display: block;
+ 
+}
+// add base $left
+@mixin field-mixin($columns, $rows, $fieldSize, $fromLeft) {
+
+    .field-#{$columns}-#{$rows} {
+        @extend .field;
+        width: $fieldSize;
+        height: $fieldSize;
+    }
+ 
+    [class*='unknown-#{$columns}-#{$rows}-'] {
+        @extend .field-#{$columns}-#{$rows};
+        background-color: #C3D028;
+    }
+
+    .canStepOn:hover{
+        background-color:#ACBA1F !important;
+        cursor: pointer; cursor: hand;
+    }
+
+    .steppedOn {
+        background-color:#ACBA1F !important;
+    }
+
+    [class*='safe-#{$columns}-#{$rows}-'] {
+        @extend .field-#{$columns}-#{$rows};
+        background-color: #C3D028;
+        background-image:  url(../../../assets/images/coin.svg);
+        background-size: $fieldSize $fieldSize;
+        background-repeat: no-repeat;
+    }
+
+    [class*='mined-#{$columns}-#{$rows}-'] {
+        @extend .field-#{$columns}-#{$rows};
+        background-color: #C3D028;
+        background-image:  url(../../../assets/images/mushroom.svg);
+        background-size: $fieldSize $fieldSize;
+        background-repeat: no-repeat;
+    }
+ 
+    @for $c from 0 through $columns {      
+        @for $r from 0 through $rows {   
+            .unknown-#{$columns}-#{$rows}-#{$c}-#{$r} {         
+                top:  $field-start-top + ($r * ($fieldSize + $fieldMargin));;
+                left: $fromLeft + $field-start-left + ($c * ($fieldSize + $fieldMargin));
+            }
+            .safe-#{$columns}-#{$rows}-#{$c}-#{$r} {         
+                top:  $field-start-top + ($r * ($fieldSize + $fieldMargin));;
+                left: $fromLeft + $field-start-left + ($c * ($fieldSize + $fieldMargin));
+            }  
+            .mined-#{$columns}-#{$rows}-#{$c}-#{$r} {         
+                top:  $field-start-top + ($r * ($fieldSize + $fieldMargin));;
+                left: $fromLeft + $field-start-left + ($c * ($fieldSize + $fieldMargin));
+            }    
+        }
+    }
+}
+
+ 
+@include field-mixin(3, 2, 110px, 90px);
+@include field-mixin(6, 3, 70px, 30px);
+@include field-mixin(9, 4, 50px, 0px);
+ 
